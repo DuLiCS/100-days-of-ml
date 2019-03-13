@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Definition of Machine Learning}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Arthur Samuel's Definition}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Tom Michell's definition}{3}{subsection.1.2}
+\contentsline {section}{\numberline {2}Why use Machine Learning}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Types of Machine Learning Systems}{4}{subsection.2.1}
+\contentsline {section}{\numberline {3}Supervised/Unsupervised Learning}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Supervised Learning}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Unsupervised Learning}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Semisupervised Learning}{6}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Reinforcement Learning}{6}{subsection.3.4}
+\contentsline {section}{\numberline {4}Batch and Online Learning}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}Batch learning}{7}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Online learning}{7}{subsection.4.2}
+\contentsline {section}{\numberline {5}Instance-based versus Model-based learning}{7}{section.5}
+\contentsline {subsection}{\numberline {5.1}Instance-based learning}{7}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Model-based learning}{7}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Training and running a linear model using Scikit-Learn}{7}{subsection.5.3}

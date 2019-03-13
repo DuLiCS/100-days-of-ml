@@ -5,7 +5,37 @@
 \usepackage{geometry}
 \usepackage{graphicx} %插入图片的宏包
 \usepackage{float} %设置图片浮动位置的宏包
-\usepackage{subfigure} %插入多图时用子图显示的宏包
+\usepackage{subfigure} 
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+%插入多图时用子图显示的宏包
+\usepackage{listings}
+\lstset{ %
+    language=python,                % the language of the code
+    basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+    numbers=left,                   % where to put the line-numbers
+    numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+    stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                    % will be numbered
+    numbersep=5pt,                  % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,               % show spaces adding particular underscores
+    showstringspaces=false,         % underline spaces within strings
+    showtabs=false,                 % show tabs within strings adding particular underscores
+    frame=single,                   % adds a frame around the code
+    rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=2,                      % sets default tabsize to 2 spaces
+    captionpos=b,                   % sets the caption-position to bottom
+    breaklines=true,                % sets automatic line breaking
+    breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+    title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                    % also try caption instead of title
+    keywordstyle=\color{blue},          % keyword style
+    commentstyle=\color{dkgreen},       % comment style
+    stringstyle=\color{mauve},         % string literal style
+    escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+    morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
 \geometry{left = 2.5cm,right= 2cm}
 \title{Sketch of Chapter 1}
 \author{DuLi}
@@ -96,10 +126,47 @@ The training data is unlabeled.Some important unsupervised learning algorithms:
 	\item[-] Eclat
 \end{itemize}
 
+\subsection{Semisupervised Learning}
+Algorithms can deal with partially labeled training data(usually a lot of unlabeled data and a little bit of labeled data) is called semisupervised learning
+
 \subsection{Reinforcement Learning}
+Reinforcement learning (RL) is an area of machine learning concerned with how software agents ought to take actions in an environment so as to maximize some notion of cumulative reward. 
+
+\section{Batch and Online Learning}
+Whether the system can learn incrementally from a stream of income data or not is the criterion to classify batch learning and online learning.
+
+\subsection{Batch learning}
+First the system is trained,and then it is launched into production and runs without learning anymore,it just apply what it has learned,it also called offline learning.
+
+\subsection{Online learning}
+In online learning,you train the system incrementally by feeding it data instances sequentially,either individually or by small groups called mini-batches.
+
+\section{Instance-based versus Model-based learning}
+Two generalization methods:Instance-based and model-based learning.
+
+\subsection{Instance-based learning}
+The system learns the examples by heart,then generalizes to new cases using a similiarity measure.
+
+\subsection{Model-based learning}
+Building a model of the examples,then use the model to make predications.The book using a linear regression problem as an example.
+
+\subsection{Training and running a linear model using Scikit-Learn}
+在对数据进行处理前，需要先获得数据，本书都使用真实数据来进行处理。第一个程序所用的程序来自OECD(Organisation for Economic Co-Operation and Development)。本书给出的是一个短链接\url{ https://stats.oecd.org/index.aspx?DataSetCode=BLI}可以在网站直接下载每一年的数据。具体的情况大家可以自行下载或者看下图表头。
+\begin{figure}[H]
+\centering
+\includegraphics[width = 6in]{oedc.jpg}
+\caption{OEDC 网站截图}
+\end{figure}
 
 
+\begin{lstlisting}
+import matplotlib
+import matplotlib as plt
+import numpy as np
+import pandas as pd
+import sklearn
 
 
+\end{lstlisting}
 
 \end{document}

@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Definition of Machine Learning}{3}
+\contentsline {subsection}{\numberline {1.1}Arthur Samuel's Definition}{3}
+\contentsline {subsection}{\numberline {1.2}Tom Michell's definition}{3}
+\contentsline {section}{\numberline {2}Why use Machine Learning}{4}
+\contentsline {subsection}{\numberline {2.1}Types of Machine Learning Systems}{4}
+\contentsline {section}{\numberline {3}Supervised/Unsupervised Learning}{5}
+\contentsline {subsection}{\numberline {3.1}Supervised Learning}{5}
+\contentsline {subsection}{\numberline {3.2}Unsupervised Learning}{5}
+\contentsline {subsection}{\numberline {3.3}Reinforcement Learning}{6}

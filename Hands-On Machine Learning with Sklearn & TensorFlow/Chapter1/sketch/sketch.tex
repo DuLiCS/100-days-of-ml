@@ -151,13 +151,20 @@ The system learns the examples by heart,then generalizes to new cases using a si
 Building a model of the examples,then use the model to make predications.The book using a linear regression problem as an example.
 
 \subsection{Training and running a linear model using Scikit-Learn}
-在对数据进行处理前，需要先获得数据，本书都使用真实数据来进行处理。第一个程序所用的程序来自OECD(Organisation for Economic Co-Operation and Development)。本书给出的是一个短链接\url{ https://stats.oecd.org/index.aspx?DataSetCode=BLI}可以在网站直接下载每一年的数据。具体的情况大家可以自行下载或者看下图表头。
+在对数据进行处理前，需要先获得数据，本书都使用真实数据来进行处理。第一个程序所用的数据来自OECD(Organisation for Economic Co-Operation and Development)和IMF(International Monetary Foundation)，分别是life satisfaction 和 GDP per captia。本书给出的是一个短链接，这里直接贴出原始链接\url{ https://stats.oecd.org/index.aspx?DataSetCode=BLI}和
+\url{https://www.imf.org/external/pubs/ft/weo/2016/01/weodata/weorept.aspx?pr.x=32&pr.y=8&sy=2015&ey=2015&scsm=1&ssd=1&sort=country&ds=.&br=1&c=512,668,914,672,612,946,614,137,311,962,213,674,911,676,193,548,122,556,912,678,313,181,419,867,513,682,316,684,913,273,124,868,339,921,638,948,514,943,218,686,963,688,616,518,223,728,516,558,918,138,748,196,618,278,624,692,522,694,622,142,156,449,626,564,628,565,228,283,924,853,233,288,632,293,636,566,634,964,238,182,662,453,960,968,423,922,935,714,128,862,611,135,321,716,243,456,248,722,469,942,253,718,642,724,643,576,939,936,644,961,819,813,172,199,132,733,646,184,648,524,915,361,134,362,652,364,174,732,328,366,258,734,656,144,654,146,336,463,263,528,268,923,532,738,944,578,176,537,534,742,536,866,429,369,433,744,178,186,436,925,136,869,343,746,158,926,439,466,916,112,664,111,826,298,542,927,967,846,443,299,917,582,544,474,941,754,446,698,666&s=NGDPDPC&grp=0&a#download}
+可以在网站直接下载每一年的数据。具体的情况大家可以自行下载或者看下图表头。唯一要注意的是，书上所使用的数据集是2015年的数据。
 \begin{figure}[H]
 \centering
 \includegraphics[width = 6in]{oedc.jpg}
 \caption{OEDC 网站截图}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width = 6in]{imf.JPG}
+\caption{IMF 网站截图}
+\end{figure}
 
 \begin{lstlisting}
 import matplotlib

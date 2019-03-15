@@ -166,14 +166,47 @@ Building a model of the examples,then use the model to make predications.The boo
 \caption{IMF 网站截图}
 \end{figure}
 
-书上并没有给出merge这两部分数据的代码(The code assume that prepare\underline{ }country\underline{ }stats() is already defined:it merges the GDP and life satisfaction data into a single pandas dataframe),接下来我们就首先define一下prepare\underline{ }country\underline{ } function.
+书上并没有给出merge这两部分数据的代码(The code assume that prepare\underline{ }country\underline{ }stats() is already defined:it merges the GDP and life satisfaction data into a single pandas dataframe),接下来我们就首先define一下prepare\underline{ }country\underline{ } function.此部分代码已经上传至Github的code文件夹下，同学们可以自行取用。这里就不再赘述。
 
-\begin{lstlisting}
+\section{Main challenge of Machine Learning}
+To summarize,"bad algorithm" and "bad data"
+\subsection{Insufficient Quantity of Training Data}
+The book demonstrate this point by an example.The result suggest that we may want to reconsider the trade-off between spending time and money on algorithm development versus spending it on corpus development.
+\subsection{Nonrepresentative Training Data}
 
-import pandas as pd
+The US presidential election in 1936.The result of the election predict by Literary Digest was wrong because the list tending to favor wealther peopele and ruling out peopele who don't care much about politics.
 
+\subsection{Poor-Quality Data}
+Errors,outliers,noise.
 
+\subsection{Irrelevant Features}
+Garbage in,garbage out.
 
-\end{lstlisting}
+\subsection{Overfitting the training data}
+Overfitting means that the model performs well on the training data,but it does not gengeralize well.
+
+How to resolve overfitting：
+\begin{itemize}
+    \item[-] Simplify the model.
+    \item[-] gather more train data.
+    \item[-] fix data errors and remove outliers.
+\end{itemize}
+
+The way to reduce the risk of overfitting is regularization.Find the right balance between fitting the data perfectly and keeping the model simple.
+
+\subsection{Underfitting the training data}
+
+\begin{itemize}
+    \item[-] Selecting a more powerful model,with more parameters.
+    \item[-] Feeding better features to the learning algorithm.
+    \item[-] Reducing the constrains on the model.
+\end{itemize}
+
+\section{Testing and Validating}
+Cross-validation.
+
+\section{Summarization}
+
+Simple problems using linear regression,more complex problems using Neural Network.
 
 \end{document}

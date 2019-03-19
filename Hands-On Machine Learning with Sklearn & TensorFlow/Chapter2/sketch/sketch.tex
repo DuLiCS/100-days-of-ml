@@ -7,6 +7,7 @@
 \usepackage{float} %设置图片浮动位置的宏包
 \usepackage{subfigure} 
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{mathtools}
 \geometry{left = 2.5cm,right= 2cm}
 \title{Chapter 2 \\End to End Machine Learning}
 \author{DuLi}
@@ -63,5 +64,79 @@ Your model output (a predicting of a district's median housing price) will be fe
 \includegraphics[width = 4in]{PROCESS.JPG}
 \caption{A machine learning pipeline for real estate investment}
 \end{figure}
+
+The next step is framing the problem:is it supervised,unsupervised,or Reinforcement learning?Is it a classification task,a regression task,or something else?Should we use batch learning or online learning technique?
+Clearly it is supervised,we need historical data to train the model.Moreover it is a typical regression task,more specifically,this is a multivariate regression since the system will use mutiple features to make a prediction.In first chapter,we predicted life satisfiction based on just one feature,the GDP per captia.Finally,there is no continuous flow of data coming in the system,there is no particular need to adjust to changing data rapidly,and the data is small enough to fit in memory,so plain batch learning should do just fine.
+
+\subsection{Select a Performance Measure}
+The next step is to select a performance measure.A typical performance measure for regression problems is the Root Mean Square Error(均方根误差),it measures the standard deviation of the errors the system makes in its prediction.
+
+\begin{equation}
+RMSE(X,h) = \sqrt{\frac{1}{m}\sum_{i=1}^{m}(h(X^{i})-y^{i})^{2}}
+\end{equation}
+
+Even though the RMSE is generally the perferred performance measure for regression tasks,in some contexts you may prefer to use another function.For example,suppose that there are many outlier districts.In that case,we may consider using the Mean Absolute Error(平均绝对误差)：
+\begin{equation}
+	MAE(X,h) = \frac{1}{m}\sum_{i=1}^{m}|h(X^i)-y^i|
+\end{equation}
+
+Both the RMSE and MAE are ways to measure the \emph{distance} between two vectors.Various distance measures or norms are possible:
+\begin{itemize}
+	\item Euclidean norm(欧几里得距离)。
+	\item Manhattan norm(曼哈顿距离),it measures the distance between two points in a city if you can only travel along orthogonal city blocks.也就是指城市中两点之间沿着街区边缘走路的距离。
+	\item More generally,the $l_{k}$ norm of a vector $v$ containing n elements is defined as:
+	\begin{equation}
+		\parallel v \parallel = (\mid v_{o} \mid^k + \mid v_{1} \mid^k+ \cdots + \mid v_{n} \mid^k)^\frac{1}{k} 
+	\end{equation}
+\end{itemize}
+
+\section{Get the data}
+It's time to get your hands dirty.
+\subsection{Create the workspace}
+First,you need to have Python enviornment installed.We recommand you installed anaconda on your computer.\url{https://www.anaconda.com/}
+\subsection{Take a Quick Look at the Data Structure}
+Let's take a look a the Data Structure.I download the database from Kaggle.\url{https://www.kaggle.com/camnugent/california-housing-prices}.Let's take a glance of the data structure.
+Each row represent one district.There are 10 attributes(Figure 3):longitude,lattidute,housing\underline{ }median\underline{ }age,total\underline{ }\\rooms,total\underline{ }bedrooms,population,households,median\underline{ }income,median\underline{ }house\underline{ }value,ocean\underline{ }proximity.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{DataStructure.JPG}
+\caption{Data Structure}
+\end{figure}
+
+The info method is useful to get a quick description of the data,in particular the total number of rows,and each attribute's type and number of non-null values.There are 20640 instances in the dataset,which means that it is fairly small by Machine Learning standards,but it's perfect to get started.Notice that the total\underline{ }bedrooms attribute has only 20433 non-null values,meaning that 207 districts are missing this feature.We will need to take care of this later.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{datainfo.JPG}
+\caption{Data Info}
+\end{figure}
+
+All attribute are numercial,except the ocean\underline{ }proximity field.We can find out what categories exist and how many districts belong to each category by using the value\underline{ }counts() method:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 3in]{datacounts.JPG}
+\caption{Data Counts}
+\end{figure}
+
+Let's look at the other fields.The describe() method shows a summary of the numercial attributes.(Figure 6).The count,mean,min and max rows are self-explanatory.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{DATADESCRIBE.JPG}
+\caption{Data Describe}
+\end{figure}
+
+Another quick way to get a feel of the type of data you are dealing with is to plot a histogram for each numercial attribute.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 3.5in]{datahist.JPG}
+\caption{A histogram for each numercial attribute}
+\end{figure}
+
+
+
 
 \end{document}

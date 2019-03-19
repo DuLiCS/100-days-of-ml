@@ -2,3 +2,7 @@
 \contentsline {section}{\numberline {2}Working with Real Data}{3}{section.2}
 \contentsline {section}{\numberline {3}Look at the Big Picture}{4}{section.3}
 \contentsline {subsection}{\numberline {3.1}Frame the Problem}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Select a Performance Measure}{5}{subsection.3.2}
+\contentsline {section}{\numberline {4}Get the data}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}Create the workspace}{6}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Take a Quick Look at the Data Structure}{6}{subsection.4.2}

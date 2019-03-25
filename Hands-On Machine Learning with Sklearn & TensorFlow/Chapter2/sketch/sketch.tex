@@ -8,6 +8,33 @@
 \usepackage{subfigure} 
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
 \usepackage{mathtools}
+\usepackage{listings}
+\lstset{ %
+    language=Python,                % the language of the code
+    basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+    numbers=left,                   % where to put the line-numbers
+    numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+    stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                    % will be numbered
+    numbersep=5pt,                  % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,               % show spaces adding particular underscores
+    showstringspaces=false,         % underline spaces within strings
+    showtabs=false,                 % show tabs within strings adding particular underscores
+    frame=single,                   % adds a frame around the code
+    rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=2,                      % sets default tabsize to 2 spaces
+    captionpos=b,                   % sets the caption-position to bottom
+    breaklines=true,                % sets automatic line breaking
+    breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+    title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                    % also try caption instead of title
+    keywordstyle=\color{blue},          % keyword style
+    commentstyle=\color{green},       % comment style
+    stringstyle=\color{yellow},         % string literal style
+    escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+    morekeywords={*,...}               % if you want to add more keywords to the set
+}
 \geometry{left = 2.5cm,right= 2cm}
 \title{Chapter 2 \\End to End Machine Learning}
 \author{DuLi}
@@ -136,7 +163,61 @@ Another quick way to get a feel of the type of data you are dealing with is to p
 \caption{A histogram for each numercial attribute}
 \end{figure}
 
+\subsection{Create a Testset}
 
+Create a test set is theoretically quite simple:just pick some instances randomly,typically 20\% of the dataset,and set them aside.
+
+\begin{lstlisting}
+import numpy as np
+
+def split_train_test(data,test_ratio):
+	shuffled_indices = np.random.permutation(len(data))
+	test_set_size = int(len(data)*test_ratio)
+	test_indices = shuffled_indices[:test_size]
+	train_indices = shuffled_indices[test_size:]
+	return data.iloc[train_indices],data.iloc[test_indices]
+
+\end{lstlisting}
+
+We can then using the function like this:
+\begin{lstlisting}
+train_set,test_set = split_train_test(housing,0.2)
+\end{lstlisting}
+
+This works,but it not perfect:if you run the program again,it will generate a different test set.One solution is to save the test set on the first run and then load it in subsequent runs.Another option is to set the random number generate's seed(eg. np.random.seed(52))before calling np.permutation().But both these solution will break next time you fetch an updated dataset.A common solution is to use each instance's identifier to decide whether or not it should go in the test set.For example,you could compute a hash of each instance's identifier.
+
+\begin{lstlisting}
+import hashlib
+
+def test_set_check(identifier,test_ratio,hash):
+    return hash(np.int64(identifier).digest()[-1]<256*test_ratio)
+
+def split_train_test_by_id(data,test_ratio,id_column,hash=hashlib.md5):
+    ids = data[id_column]
+    in_test_set = ids.apply(lambda id_:test_set_check(id_,test_ratio,hash))
+    return data.iloc[~in_test_set],data.iloc[in_test_set]
+\end{lstlisting}
+
+Unfortunately,the hosuing dataset does not have an identifier column.The simplest solution is to use the row index as the ID:
+\begin{lstlisting}
+
+housing_with_id = housing.reset_index()
+train_set,test_set = split_train_test_by_id(hosuing_with_id,0.2,"index")
+
+\end{lstlisting}
+
+
+We can utilize the train\underline{ }test\underline{}split function to reah the same effect of the split function above.
+
+\begin{lstlisting}
+from sklearn.model_selection import train_test_split
+
+train_set,test_set = train_test_split(housing,test_size = 0.25,random_state = 0)
+
+\end{lstlisting}
+This generally fine if your dataset is large enough,bu if it is not,you run the risk of introducing a significant sampling bias.For example,when a survey company decides to call 1000 people to ask them a few questions ,they don't just pick 1000 people randomly in a phone booth.They try to ensure that these 1000 people are representative of the whole population,eg. the US population is composed of 51.3\% female and 48.7\% male,so a survey in the US should try to maintain this ratio in the sample:513 female and 487 male.This is called \emph{stratified sampling.}
+
+Since the median income is a very important attribute to predict median housing prices. You may want to ensure that the test set is representative of the various categories of incomes in the whole dataset 
 
 
 \end{document}

@@ -6,3 +6,4 @@
 \contentsline {section}{\numberline {4}Get the data}{6}{section.4}
 \contentsline {subsection}{\numberline {4.1}Create the workspace}{6}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Take a Quick Look at the Data Structure}{6}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Create a Testset}{9}{subsection.4.3}

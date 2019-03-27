@@ -7,3 +7,6 @@
 \contentsline {subsection}{\numberline {4.1}Create the workspace}{6}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Take a Quick Look at the Data Structure}{6}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Create a Testset}{9}{subsection.4.3}
+\contentsline {section}{\numberline {5}Discover and Visualize the Data ti Gain Insights}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Visualizing Geographical Data}{12}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Looking for Correlations}{14}{subsection.5.2}

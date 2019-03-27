@@ -10,7 +10,7 @@
 \usepackage{mathtools}
 \usepackage{listings}
 \lstset{ %
-    language=Python,                % the language of the code
+    language=python,                % the language of the code
     basicstyle=\footnotesize,           % the size of the fonts that are used for the code
     numbers=left,                   % where to put the line-numbers
     numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
@@ -31,7 +31,7 @@
                                     % also try caption instead of title
     keywordstyle=\color{blue},          % keyword style
     commentstyle=\color{green},       % comment style
-    stringstyle=\color{yellow},         % string literal style
+    stringstyle=\color{red},         % string literal style
     escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
     morekeywords={*,...}               % if you want to add more keywords to the set
 }
@@ -218,6 +218,138 @@ train_set,test_set = train_test_split(housing,test_size = 0.25,random_state = 0)
 This generally fine if your dataset is large enough,bu if it is not,you run the risk of introducing a significant sampling bias.For example,when a survey company decides to call 1000 people to ask them a few questions ,they don't just pick 1000 people randomly in a phone booth.They try to ensure that these 1000 people are representative of the whole population,eg. the US population is composed of 51.3\% female and 48.7\% male,so a survey in the US should try to maintain this ratio in the sample:513 female and 487 male.This is called \emph{stratified sampling.}
 
 Since the median income is a very important attribute to predict median housing prices. You may want to ensure that the test set is representative of the various categories of incomes in the whole dataset 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{incomehist.JPG}
+\caption{Histogram of income categories}
+\end{figure}
+
+Let's look at the histogram of income categories,most median income values are clustered around 2-5(tens of thousands of dallors),but some median incomes go far beyond 6.It is important to have a sufficient number of instances in your dataset for each stratum,or else the estimate of the stratum'simportance may br biased,so we should not have too many strata(dividing the median income by 1.5 and rounding up using cel and then merge all the categories greater than 5 into category 5).
+
+\begin{lstlisting}
+raw_data["income_cat"] = np.ceil(raw_data["median_income"]/1.5)
+raw_data["income_cat"].where(raw_data["income_cat"]>5,5.0,inplace = False)
+\end{lstlisting}
+
+Now you are ready to do stratified sampling based on the income category.For this we can use Scikit-learn's StratifiedShuffleSplit class:
+
+\begin{lstlisting}
+from sklearn.model_selection import StratifiedShuffleSplit
+
+split = StratifiedShuffleSplit(n_splits = 1,test_size = 0.2, random_state = 17)
+
+for train_index, test_index in split.split(raw_data, raw_data["income_cat"]):
+    strat_train_set = raw_data.loc[train_index]
+    strat_test_set = raw_data.loc[test_index]	
+\end{lstlisting}
+
+By this way,the category proportions in the test\underline{ }set which generated with stratified sampling almost identical to those in the full dataset.
+
+We spent quite a bit of time on the test set generation for a good reason:this is an often neglected but critical part of a Machine Learning project.
+At last,we should remove the income\underline{ }cat attribute so the data is back to its original state:
+
+\begin{lstlisting}
+for set in(strat_train_set,strat_test_set):
+	set.drop(["income_cat"],axis = 1,inplace = True)
+\end{lstlisting}
+
+
+这个部分看似平淡无奇，其实还蛮有用的，之前在选数据集的时候，从来没有考虑过这个问题。回头想想，选择有代表性的数据集对于一个监督学习的系统来说，还是非常重要的。使得在训练阶段也能提高精度，这个道理我想是不言自明的。
+
+\section{Discover and Visualize the Data ti Gain Insights}
+
+So far we have only taken a quick glance at the data to get a general understanding of the kind of data we are manipulating.In our case,the set is quite small so you can just work directly on the full set.Let's create a copy so you can play with it without harming the training set.
+
+\begin{lstlisting}
+housing = strat_train_set.copy()
+\end{lstlisting}
+
+\subsection{Visualizing Geographical Data}
+
+Since there is geographical information(latitude and longitude),let's plot it!
+
+\begin{lstlisting}
+housing.plot(kind="scatter",x="longitude",y="latitude")
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{longi_and_lati.JPG}
+\caption{A geographical scatterplot of the data}
+\end{figure}
+
+Setting the alpha option to 0.1 makes it much easier to visualize the places where there is a high density of data points.
+
+\begin{lstlisting}
+housing.plot(kind="scatter",x="longitude",y="latitude",alpha = 0.1)
+\end{lstlisting}
+
+alpha:float (0.0 transparent through 1.0 opaque),这里的alpha指的是透明度,所以密度越大的地方，因为重叠的原因，颜色就会越深。
+
+It's better now,let's look at the housing prices.The radius of each circle represents the district's population(option s),and the color represents the price(option c).We will use a predefined color map(option cmap)called jet,which ranges from blue(low values) to red(high prices):
+
+\begin{lstlisting}
+housing.plot(kind="scatter",x="longitude",y="latitude",alpha=0.4,s=housing["population"]/100,label="population",c="median_house_value",cmap=plt.get_cmap("jet"),colorbar=True)
+plt.legend()
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{Housing_price_pic.JPG}
+\caption{California housing prices}
+\end{figure}
+
+观察最后得到的图我们大概能看得出一些结论，这些结论也与我们的常识相符。首先，房价和位置的关系很大，临海的房价普遍要高一些，还有某些位置的房价普遍要高一些，这些地方应该是加州沿海的一些城市，旧金山，洛杉矶等等。当然这也不是全部，北部沿海的房价也会低一些。
+
+\subsection{Looking for Correlations}
+
+ Since the data set is not too large ,we can easily compute the \emph{Standard correlation coefficient}(also called Pearson's r 皮尔森相关系数) between every pair of attributes using the corr() method:
+
+\begin{lstlisting}
+corr_matrix = housing.corr()
+\end{lstlisting}
+
+The matrix is big,so let's look at a specific attribute(eg.median house value).
+\begin{lstlisting}
+corr_matrix["median_house_value"].sort_values(ascending=False)
+\end{lstlisting}
+
+The correlation coefficient ranges from 1 to -1.接近1代表正相关，接近-1代表负相关，我们可以看出平均房价和收入是正相关关系，而和经度是负相关的，也就是内陆房价低，沿海高。Finally,coefficients close to zero mean there is no linear correlation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 2.5in]{pearson_r.JPG}
+%\caption{California housing prices}
+\end{figure}
+
+下面这张图来自维基百科，从左到右依次表示皮尔森相关系数在不同值时的情况。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{scatter_matrix.JPG}
+\caption{Scatter Matrix}
+\end{figure}
+
+The correlation coefficient only measures linear correlations.
+
+Another way to check for correlations between attributes is to use Pandas' scatter\underline{ }matrix function.Since there are now 11 numerical attributes,you would get $11^2$ plots,so let's just focus on a few promising attributes that seem most correlated with the median housing value.
+
+\begin{lstlisting}
+from pandas.plotting import scatter_matrix
+
+attributes = ["median_house_value","median_income","total_rooms","housing_median_age"]
+
+scatter_matrix(housing[attributes],figsize=(12,8))
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{scatter_col.JPG}
+\caption{Scatter Matrix}
+\end{figure}
+
 
 
 \end{document}

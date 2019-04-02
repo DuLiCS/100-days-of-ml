@@ -7,6 +7,12 @@
 \contentsline {subsection}{\numberline {4.1}Create the workspace}{6}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Take a Quick Look at the Data Structure}{6}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Create a Testset}{9}{subsection.4.3}
-\contentsline {section}{\numberline {5}Discover and Visualize the Data ti Gain Insights}{12}{section.5}
+\contentsline {section}{\numberline {5}Discover and Visualize the Data to Gain Insights}{12}{section.5}
 \contentsline {subsection}{\numberline {5.1}Visualizing Geographical Data}{12}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Looking for Correlations}{14}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Experinment with attribute Combinations}{16}{subsection.5.3}
+\contentsline {section}{\numberline {6}Prepare the Data for Machine Learning Algorithms}{17}{section.6}
+\contentsline {subsection}{\numberline {6.1}Data Cleaning}{17}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Handling Text and Categrocial Attributes}{19}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Feature Scaling}{20}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Transform pipelines}{21}{subsection.6.4}

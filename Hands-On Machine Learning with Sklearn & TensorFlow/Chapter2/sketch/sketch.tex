@@ -257,7 +257,7 @@ for set in(strat_train_set,strat_test_set):
 
 这个部分看似平淡无奇，其实还蛮有用的，之前在选数据集的时候，从来没有考虑过这个问题。回头想想，选择有代表性的数据集对于一个监督学习的系统来说，还是非常重要的。使得在训练阶段也能提高精度，这个道理我想是不言自明的。
 
-\section{Discover and Visualize the Data ti Gain Insights}
+\section{Discover and Visualize the Data to Gain Insights}
 
 So far we have only taken a quick glance at the data to get a general understanding of the kind of data we are manipulating.In our case,the set is quite small so you can just work directly on the full set.Let's create a copy so you can play with it without harming the training set.
 
@@ -350,6 +350,168 @@ scatter_matrix(housing[attributes],figsize=(12,8))
 \caption{Scatter Matrix}
 \end{figure}
 
+这里简单做一个说明，之几张图是将数据按照各自的位置两两进行绘图，按照皮尔森系数的意义，两个数据集在一起越接近一条直线，相关性越好，所以在这张图上可以明显的看出，median\underline{ }income参数和median\underline{ }house\underline{ }value的相关性是最好的。这个也和之前计算的结果相符。接下来重点关注这个两个参数之间的关系。
+\begin{lstlisting}
+housing.plot(kind="scatter",x="median_income",y="median_house_value",alpha = 0.1)
+\end{lstlisting}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{specific_scatter.JPG}
+\caption{Median income versus median house value}
+\end{figure}
+
+This plot reveals a few things.First,the correlation is indeed very strong;we can clearly see the upward trend and the points are not too dispersed.Second,the price cap is clearly visible as a horizontial line at 500000，and this plot reveals other less obvious straight lines:450000,350000.
+
+
+\subsection{Experinment with attribute Combinations}
+One last thingwe may want to do before actually preparing the data for Machine Learning algorithms is try out various attribute combinations.简单的举个例子，就是说单单看一个地区卧室的总数并不是非常有用的，还必须结合房间数或者人口数才真正的有意义。接下来在数据集上，我们把这几个属性添上。
+
+\begin{lstlisting}
+housing["roms_per_household"] = housing["total_rooms"]/housing["households"]
+housing["bedrooms_per_room"] = housing["total_bedrooms"]/housing["total_rooms"]
+housing["population_per_room"] = housing["population"]/housing["total_rooms"]
+\end{lstlisting}
+
+接下来再算一次Pearson's r:
+\begin{lstlisting}
+corr_matrix = housing.corr()
+corr_matrix["median_house_value"].sort_values(ascending=False)
+\end{lstlisting}
+
+\begin{figure}[H]
+  \centering
+    \subfigure[Original correlation]{\includegraphics[width=0.5\textwidth]{pearson_r.JPG}}
+    \subfigure[Combination correlation]{\includegraphics[width=0.44\textwidth]{pearson_R_new.JPG}} \  
+    \caption{Comparation of two cases}
+    \label{fig:data_distribution}
+    \vspace{0.2in}
+\end{figure}
+
+值得注意的是，在相关性的计算上，最坏的情况是0，无论是正相关还是负相关都是好的，也就是说越接近1或者-1都好，所以在这里看出，计算后的bedrooms\underline{ }room是好于卧室数以及房间数的。同时，rooms\underline{ }\\household也是同样的情况。在后续我们运行系统之后，会得到比现在更加深入的信息，这是一个迭代并不断优化的过程。
+
+\section{Prepare the Data for Machine Learning Algorithms}
+
+数据预处理是一个重要的过程，是常见的处理过程，在项目和项目之间大概是可以通用的。首先要做的是数剧的分离，即原数据集和label的分离。
+\begin{lstlisting}
+housing = strat_train_set.drop("median_house_value",axis=1)
+housing_labels = strat_train_set["median_house_value"].copy()
+\end{lstlisting}
+Note that drop() creates a copy of the data and does not affect  strat\underline{ }train\underline{ }set.
+
+\subsection{Data Cleaning}
+
+Most Machine Learning algorithms cannot work with missing features.We noticed that the total\underline{ }bedrooms attribute has some missing values,let's fix this:
+
+\begin{itemize}
+	\item Get rid of corresponding districts.
+	\item Get rid of the whole attribute.
+	\item Set the value to some value(0,mean,median,etc) 
+\end{itemize}
+
+We can accomplish these easily using DataFrame's dropna(),drop(),and fillna() methods:
+
+\begin{lstlisting}
+housing.dropna(subset=["total_bedrooms"])
+housing.drop("total_bedrooms",axis=1)
+hosuing["total_bedrooms"].fillna(median)
+\end{lstlisting}
+
+Scikit-Learn provide a handy class to take care of missing values:Imputer.Here is how to use it.First,we need to crate an Imputer instance,specifying that you want to replace each attribute's missing values with the median of that attribute:
+\begin{lstlisting}
+from sklearn.preprocessing import Imputer
+imputer = Imputer(strategy="median")
+\end{lstlisting}
+
+Since the median can only be computed on numercial attributes,we need to create a copy of the data without the text attribute ocean\underline{ }proximity:
+
+\begin{lstlisting}
+housing_num = housing.drop("ocean_proximity",axis = 1)
+\end{lstlisting}
+Now we can fit the imputer instance to the training data using the fit() method:
+\begin{lstlisting}
+imputer.fit(housing_num)
+\end{lstlisting}
+The imputer has simply computed the median of each attribute and stored the result in the statistics\underline{ } instacne varible.
+\begin{lstlisting}
+imputer.statistics_
+housing_num.median().values
+\end{lstlisting}
+
+Now we can use this imputer to transform the training set by replacing missing values by the learned medaians:
+\begin{lstlisting}
+X = imputer.transform(housing_num)
+\end{lstlisting}
+The result is a plain Numpy array containing the transformed features.If you want to put it back into a Pandas DataFrame,it's simply:
+\begin{lstlisting}
+housing_tr = pd.DataFrame(X,columns=housing_num.columns)
+\end{lstlisting}
+
+\subsection{Handling Text and Categrocial Attributes}
+
+Earlier we left out the categorical attribute ocean\underline{ }proximity beacuse it is a text attribute,let's convert these text labels to numbers.
+
+Scikit-Learn provides a transformer for this task called LabelEncoder:
+
+\begin{lstlisting}
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+housing_cat = housing["ocean_proximity"]
+housing_cat_encoded = encoder.fit_transform(housing_cat)
+housing_cat_encoded
+\end{lstlisting}
+
+We can look at the mapping that this encoder has learned using the class\underline{} attribute:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{encoder_class.JPG}
+%\caption{Scatter Matrix}
+\end{figure}
+
+这样的处理有一个问题：对上面的例子而言，0和4的距离大于0和1的距离，这个在实际中并没有体现。所以常见的处理方式是，把非数值属性的数值表示由单独向量转化为一个多维数组，用不同位置的0和1来表示不同的属性。Scikit-Learn恰好提供了这样的方法。也就是OneHotEncoder.
+
+\begin{lstlisting}
+from sklearn.preprocessing import OneHotEncoder
+encoder= OneHotEncoder()
+housing_cat_1hot = encoder.fit_transform(housing_cat_encoded.reshape(-1,1))
+housing_cat_1hot.toarray()
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 2in]{Onehot.JPG}
+%\caption{Median income versus median house value}
+\end{figure}
+
+We can apply both transformations(text to integer,integer to one\underline{ }hot vectors) using the LabelBinarizer class
+
+\begin{lstlisting}
+from sklearn.preprocessing import LabelBinarizer
+encoder = LabelBinarizer()
+housing_cat_1hot = encoder.fit_transform(housing_cat)
+housing_cat_1hot
+\end{lstlisting}
+LabelBinarier method are recommended.
+
+\subsection{Feature Scaling}
+
+Machine Learning algorithms do not perform well when the input numerical attributes have very different scales.The total number of rooms ranges from 6 to 39320 while the median income ranges from 0 to 15.
+
+There are two common ways to get all attribute to have the same scale:min-max scaling and strandardization.
+Min-max scaling(很多人叫normaliza)：把数据根据最大最小值限定在0到1的范围内。Scikit—learn中的MinMaxScalar就是用来实现这个功能的。
+
+\begin{equation}
+x_{new} = \frac{x-x_{min}}{x_{max}-x_{min}}
+\end{equation}
+
+Standardization：First,it substracts the mean value and divide by unit variance.Standardization does not bound values to a specific range,which may be problems in some algorithms(neural networks).However standardization is much less affected by outliers.简单说就是，当一组数据中大部分数在1-100之间，当有一个离群点1000时，大量的数据都在一个很小的范围内。Scikit-learn provides a transform called StandardScaler for standardization.
+
+\begin{equation}
+x_{new}  = \frac{x-\mu}{\sigma}
+\end{equation}
+
+\subsection{Transform pipelines}
 
 \end{document}

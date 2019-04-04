@@ -15,4 +15,5 @@
 \contentsline {subsection}{\numberline {6.1}Data Cleaning}{17}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Handling Text and Categrocial Attributes}{19}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}Feature Scaling}{20}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Transform pipelines}{21}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.4}Custom Transformers}{21}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Transform pipelines}{21}{subsection.6.5}

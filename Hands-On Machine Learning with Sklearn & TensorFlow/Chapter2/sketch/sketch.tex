@@ -759,4 +759,115 @@ cat_pipeline = Pipeline([('selector',DataFrameSelector(cat_attribs)),('label_bin
 full_pipeline = FeatureUnion(transformer_list=[("num_pipeline",num_pipeline),("cat_pipeline",cat_pipeline),])
 \end{lstlisting}	
 
+最后这部分代码比较多，其实主要是书上的代码稍稍有点问题，所以就稍稍做了改动，具体可以查看code部分的实现，但是这都不是最重要的，最重要的其实是对pipeline的掌握，其实这里无非就是把之前的step by step的内容改成了pipeline的形式。接下来，我们就要开始最核心部分的学习了，我们花了很长的时间去做准备工作，真正的模型构建及数据处理，由于sklearn封装的原因，显得比较单薄。
+
+\section{Select and Train a Model}
+
+\subsection{Training and Evaluating on the Training Set}
+
+Let's first train a Linear Regression Model.
+\begin{lstlisting}
+from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+lin_reg.fit(housing_prepared,housing_labels)
+\end{lstlisting}
+
+It's simple!Let's try it out on a few instance from the training set:
+
+\begin{lstlisting}
+some_data = housing.iloc[:5]
+some_labels = housing_labels[:5]
+some_data_prepared = full_pipeline.transform(some_data)
+print(lin_reg.predict(some_data_prepared))
+print(list(some_labels))
+\end{lstlisting}
+
+It works!Although the prediction are not exactly accurate.Let's evaluate the RMSE(标准差) on the whole training set using Scikit-Learn's mean\underline{ }squared\_error function.
+
+\begin{lstlisting}
+from sklearn.metrics import mean_squared_error
+
+housing_predictions = lin_reg.predict(housing_prepared)
+lin_mse = mean_squared_error(housing_labels,housing_predictions)
+lin_rmse = np.sqrt(lin_mse)
+lin_rmse
+\end{lstlisting}
+
+The result is 67842.Well,this is better than nothing but clearly not a great score.As we said before,underfitting is the reason why leading to the low accuracy.We can selecting a more powerful model,feeding better feature or reducing the constraints on the model.Let's first try a more complex model to see how it does.
+
+Let's train a DecisionTreeRegressor.This is a more powerful model,capable of finding complex nonlinear relationship in the data.Then,let's evaluate it on the training set:
+
+\begin{lstlisting}
+from sklearn.tree import DecisionTreeRegressor
+
+tree_reg = DecisionTreeRegressor()
+tree_reg.fit(housing_prepared,housing_labels)
+housing_predictions = tree_reg.predict(housing_prepared)
+tree_mse  =mean_squared_error(housing_predictions,housing_labels)
+tree_rmse = np.sqrt(tree_mse)
+tree_rmse
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{treeregressorJPG.JPG}
+\caption{bizarre result}
+\end{figure}
+
+
+Of course it is much more likely that the model has badly overfitting problem.
+
+\subsection{Better Evaluation Using Cross-Validation}
+
+One way to evaluate the decision Tree would be to use the train\_test\_split function to split the training set into a smaller training set and a vaildation set,then train your models against the smaller training set and evaluate them against the vaildation set.
+
+A great alternative is to use Scikit-Learn's cross-vaildation feature.The following code performs \emph{K-fold} cross-vaildation:简而言之，就是训练集分成10份，分别用一份来验证，其余9份来训练，一共做十次。输出结果是一个array，把十次的结果输出。
+
+\begin{lstlisting}
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(tree_reg,housing_prepared,housing_labels,scoring="neg_mean_squared_error",cv=10)
+rmse_scores = np.sqrt(-scores)
+\end{lstlisting} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{cross_val.JPG}
+\caption{Cross-Vaildation of DecisionTreeRegressor}
+\end{figure}
+
+The decision tree doesn't look good as it did earlier.In fact,it seems to perform worse than the Linear Regression Model.Let's compute the same scores for the Linear Regression model:
+\begin{lstlisting}
+lin_scores = cross_val_score(lin_reg,housing_prepared,housing_labels,scoring="neg_mean_squared_error",cv=10)
+lin_rmse_scores = np.sqrt(-lin_scores)
+display_scores(lin_rmse_scores)
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4in]{lin_cross_val.JPG}
+\caption{Cross-Vaildation of Linear Regression}
+\end{figure}
+
+可以看出，决策树模型的精度比起线性回归更差。
+
+Let's try one last model:RandomForestRegressor.更多内容，后面章节会细讲。
+\begin{lstlisting}
+from sklearn.ensemble import RandomForestRegressor
+forest_reg = RandomForestRegressor()
+forest_reg.fit(housing_prepared,housing_labels)
+scores = cross_val_score(forest_reg,housing_prepared,housing_labels,scoring="neg_mean_squared_error",cv=10)
+forest_rmse_scores = np.sqrt(-scores)
+display_scores(forest_rmse_scores)
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 6in]{forest_val.JPG}
+\caption{Cross-Vaildation of RandomForestRegressor}
+\end{figure}
+
+
 \end{document}

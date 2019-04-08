@@ -17,3 +17,6 @@
 \contentsline {subsection}{\numberline {6.3}Feature Scaling}{20}{subsection.6.3}
 \contentsline {subsection}{\numberline {6.4}Custom Transformers}{21}{subsection.6.4}
 \contentsline {subsection}{\numberline {6.5}Transform pipelines}{21}{subsection.6.5}
+\contentsline {section}{\numberline {7}Select and Train a Model}{27}{section.7}
+\contentsline {subsection}{\numberline {7.1}Training and Evaluating on the Training Set}{27}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Better Evaluation Using Cross-Validation}{28}{subsection.7.2}

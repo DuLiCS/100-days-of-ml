@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.16)  8 APR 2019 10:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.9.16)  8 APR 2019 13:07
 entering extended mode
 **"D:/programme/100-days-of-ml/Hands-On Machine Learning with Sklearn & TensorF
 low/Chapter2/sketch/sketch.tex"
@@ -1164,70 +1164,70 @@ and DVIPDFMx (CTEX)
 LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 (Font)              size <10.95> substituted on input line 4.
 
-)
+[2])
 \tf@toc=\write4
 \openout4 = `sketch.toc'.
 
- [2]
+ [3]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 64.
  ("D:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.53937> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 64.
- [3]
-<picture.png, id=146, 811.03pt x 721.69624pt>
+ [4]
+<picture.png, id=190, 811.03pt x 721.69624pt>
 File: picture.png Graphic file (type png)
 <use picture.png>
 Package pdftex.def Info: picture.png  used on input line 80.
 (pdftex.def)             Requested size: 289.07999pt x 257.24461pt.
-<PROCESS.JPG, id=148, 616.17703pt x 315.80484pt>
+<PROCESS.JPG, id=192, 616.17703pt x 315.80484pt>
 File: PROCESS.JPG Graphic file (type jpg)
 <use PROCESS.JPG>
 Package pdftex.def Info: PROCESS.JPG  used on input line 91.
 (pdftex.def)             Requested size: 289.07999pt x 148.16325pt.
- [4 <./picture.png (PNG copy)>]
+ [5 <./picture.png (PNG copy)>]
 Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (
 quanjiao) on input line 105.
- [5 <./PROCESS.JPG>]
-<DataStructure.JPG, id=198, 557.08125pt x 240.14719pt>
+ [6 <./PROCESS.JPG>]
+<DataStructure.JPG, id=242, 557.08125pt x 240.14719pt>
 File: DataStructure.JPG Graphic file (type jpg)
 <use DataStructure.JPG>
 Package pdftex.def Info: DataStructure.JPG  used on input line 130.
 (pdftex.def)             Requested size: 289.07999pt x 124.62073pt.
- [6]
+ [7]
 Overfull \hbox (0.22272pt too wide) in paragraph at lines 134--135
 \OT1/cmr/m/n/10.53937 rows,and each at-tribute's type and num-ber of non-null v
 al-ues.There are 20640 in-stances in the dataset,which
  []
 
-<datainfo.JPG, id=235, 276.28218pt x 170.13562pt>
+<datainfo.JPG, id=280, 276.28218pt x 170.13562pt>
 File: datainfo.JPG Graphic file (type jpg)
 <use datainfo.JPG>
 Package pdftex.def Info: datainfo.JPG  used on input line 138.
 (pdftex.def)             Requested size: 289.07999pt x 178.01422pt.
-<datacounts.JPG, id=236, 252.19218pt x 87.32625pt>
+<datacounts.JPG, id=281, 252.19218pt x 87.32625pt>
 File: datacounts.JPG Graphic file (type jpg)
 <use datacounts.JPG>
 Package pdftex.def Info: datacounts.JPG  used on input line 146.
 (pdftex.def)             Requested size: 216.81pt x 75.07512pt.
-[7 <./DataStructure.JPG> <./datainfo.JPG>]
+[8 <./DataStructure.JPG> <./datainfo.JPG>]
 Overfull \hbox (6.7513pt too wide) in paragraph at lines 150--151
 []\OT1/cmr/m/n/10.53937 Let's look at the other fields.The de-scribe() method s
 hows a sum-mary of the nu-mer-cial at-tributes.(Figure
  []
 
-<DATADESCRIBE.JPG, id=244, 668.4975pt x 175.0289pt>
+<DATADESCRIBE.JPG, id=288, 668.4975pt x 175.0289pt>
 File: DATADESCRIBE.JPG Graphic file (type jpg)
 <use DATADESCRIBE.JPG>
 Package pdftex.def Info: DATADESCRIBE.JPG  used on input line 154.
 (pdftex.def)             Requested size: 289.07999pt x 75.69093pt.
-<datahist.JPG, id=245, 748.29562pt x 532.99126pt>
+<datahist.JPG, id=289, 748.29562pt x 532.99126pt>
 File: datahist.JPG Graphic file (type jpg)
 <use datahist.JPG>
 Package pdftex.def Info: datahist.JPG  used on input line 162.
 (pdftex.def)             Requested size: 252.94499pt x 180.1655pt.
-[8 <./datacounts.JPG> <./DATADESCRIBE.JPG> <./datahist.JPG>]
+[9 <./datacounts.JPG> <./DATADESCRIBE.JPG> <./datahist.JPG>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7.52812> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 193.
@@ -1238,37 +1238,37 @@ File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <7.52812> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 193.
- [9]
-<incomehist.JPG, id=279, 453.94594pt x 245.04047pt>
+ [10]
+<incomehist.JPG, id=323, 453.94594pt x 245.04047pt>
 File: incomehist.JPG Graphic file (type jpg)
 <use incomehist.JPG>
 Package pdftex.def Info: incomehist.JPG  used on input line 224.
 (pdftex.def)             Requested size: 289.07999pt x 156.04765pt.
- [10 <./incomehist.JPG>] [11]
-<longi_and_lati.JPG, id=349, 388.07484pt x 256.33266pt>
+ [11 <./incomehist.JPG>] [12]
+<longi_and_lati.JPG, id=393, 388.07484pt x 256.33266pt>
 File: longi_and_lati.JPG Graphic file (type jpg)
 <use longi_and_lati.JPG>
 Package pdftex.def Info: longi_and_lati.JPG  used on input line 278.
 (pdftex.def)             Requested size: 289.07999pt x 190.94653pt.
- [12 <./longi_and_lati.JPG>]
-<Housing_price_pic.JPG, id=360, 445.665pt x 233.74828pt>
+ [13 <./longi_and_lati.JPG>]
+<Housing_price_pic.JPG, id=405, 445.665pt x 233.74828pt>
 File: Housing_price_pic.JPG Graphic file (type jpg)
 <use Housing_price_pic.JPG>
 Package pdftex.def Info: Housing_price_pic.JPG  used on input line 299.
 (pdftex.def)             Requested size: 289.07999pt x 151.6207pt.
- [13 <./Housing_price_pic.JPG>]
-<pearson_r.JPG, id=381, 305.64188pt x 160.72546pt>
+ [14 <./Housing_price_pic.JPG>]
+<pearson_r.JPG, id=425, 305.64188pt x 160.72546pt>
 File: pearson_r.JPG Graphic file (type jpg)
 <use pearson_r.JPG>
 Package pdftex.def Info: pearson_r.JPG  used on input line 322.
 (pdftex.def)             Requested size: 180.67499pt x 95.00868pt.
-<scatter_matrix.JPG, id=382, 897.3525pt x 394.85016pt>
+<scatter_matrix.JPG, id=426, 897.3525pt x 394.85016pt>
 File: scatter_matrix.JPG Graphic file (type jpg)
 <use scatter_matrix.JPG>
 Package pdftex.def Info: scatter_matrix.JPG  used on input line 330.
 (pdftex.def)             Requested size: 289.07999pt x 127.1981pt.
- [14 <./pearson_r.JPG> <./scatter_matrix.JPG>]
-<scatter_col.JPG, id=392, 705.76172pt x 468.24937pt>
+ [15 <./pearson_r.JPG> <./scatter_matrix.JPG>]
+<scatter_col.JPG, id=436, 705.76172pt x 468.24937pt>
 File: scatter_col.JPG Graphic file (type jpg)
 <use scatter_col.JPG>
 Package pdftex.def Info: scatter_col.JPG  used on input line 349.
@@ -1291,29 +1291,29 @@ C70/rm/m/n/10.53937/4e   \C70/rm/m/n/10.53937/67 a \C70/rm/m/n/10.53937/76 ô \C
 .53937 median$[]$house$[]$value\C70/rm/m/n/10.53937/76 „
  []
 
-<specific_scatter.JPG, id=394, 409.53pt x 242.02922pt>
+<specific_scatter.JPG, id=438, 409.53pt x 242.02922pt>
 File: specific_scatter.JPG Graphic file (type jpg)
 <use specific_scatter.JPG>
 Package pdftex.def Info: specific_scatter.JPG  used on input line 360.
 (pdftex.def)             Requested size: 289.07999pt x 170.85588pt.
-[15 <./scatter_col.JPG>]
+[16 <./scatter_col.JPG>]
 File: pearson_r.JPG Graphic file (type jpg)
 <use pearson_r.JPG>
 Package pdftex.def Info: pearson_r.JPG  used on input line 384.
 (pdftex.def)             Requested size: 243.1288pt x 127.85216pt.
-<pearson_R_new.JPG, id=409, 307.1475pt x 209.65828pt>
+<pearson_R_new.JPG, id=453, 307.1475pt x 209.65828pt>
 File: pearson_R_new.JPG Graphic file (type jpg)
 <use pearson_R_new.JPG>
 Package pdftex.def Info: pearson_R_new.JPG  used on input line 385.
 (pdftex.def)             Requested size: 213.95453pt x 146.04637pt.
- [16 <./specific_scatter.JPG>]
+ [17 <./specific_scatter.JPG>]
 Overfull \hbox (12.66507pt too wide) in paragraph at lines 404--405
 []\OT1/cmr/m/n/10.53937 Most Ma-chine Learn-ing al-go-rithms can-not work with 
 miss-ing fea-tures.We no-ticed that the total$[]$bedrooms
  []
 
-[17 <./pearson_R_new.JPG>] [18]
-<encoder_class.JPG, id=454, 502.12593pt x 50.81485pt>
+[18 <./pearson_R_new.JPG>] [19]
+<encoder_class.JPG, id=499, 502.12593pt x 50.81485pt>
 File: encoder_class.JPG Graphic file (type jpg)
 <use encoder_class.JPG>
 Package pdftex.def Info: encoder_class.JPG  used on input line 468.
@@ -1338,63 +1338,77 @@ m/m/n/10.53937/54  \C70/rm/m/n/10.53937/4f M \C70/rm/m/n/10.53937/7f n \C70/rm
 10.53937 1\C70/rm/m/n/10.53937/67 e
  []
 
-[19 <./encoder_class.JPG>]
-<Onehot.JPG, id=472, 240.14719pt x 159.21985pt>
+[20 <./encoder_class.JPG>]
+<Onehot.JPG, id=516, 240.14719pt x 159.21985pt>
 File: Onehot.JPG Graphic file (type jpg)
 <use Onehot.JPG>
 Package pdftex.def Info: Onehot.JPG  used on input line 484.
 (pdftex.def)             Requested size: 144.54pt x 95.83147pt.
- [20 <./Onehot.JPG>] [21] [22] [23] [24] [25]
-[26]
+ [21 <./Onehot.JPG>] [22] [23] [24] [25] [26]
+[27]
 Overfull \hbox (8.2737pt too wide) in paragraph at lines 797--798
 \OT1/cmr/m/n/10.53937 fore,underfitting is the rea-son why lead-ing to the low 
 ac-cu-racy.We can se-lect-ing a more pow-er-ful model,feeding
  []
 
-[27]
-<treeregressorJPG.JPG, id=777, 639.13782pt x 273.27094pt>
+[28]
+<treeregressorJPG.JPG, id=821, 639.13782pt x 273.27094pt>
 File: treeregressorJPG.JPG Graphic file (type jpg)
 <use treeregressorJPG.JPG>
 Package pdftex.def Info: treeregressorJPG.JPG  used on input line 815.
 (pdftex.def)             Requested size: 289.07999pt x 123.6004pt.
- [28 <./treeregressorJPG.JPG>]
-<cross_val.JPG, id=792, 587.19376pt x 204.01219pt>
+ [29 <./treeregressorJPG.JPG>]
+<cross_val.JPG, id=836, 587.19376pt x 204.01219pt>
 File: cross_val.JPG Graphic file (type jpg)
 <use cross_val.JPG>
-Package pdftex.def Info: cross_val.JPG  used on input line 837.
+Package pdftex.def Info: cross_val.JPG  used on input line 839.
 (pdftex.def)             Requested size: 289.07999pt x 100.4369pt.
-<lin_cross_val.JPG, id=793, 881.91985pt x 143.78719pt>
+<lin_cross_val.JPG, id=837, 881.91985pt x 143.78719pt>
 File: lin_cross_val.JPG Graphic file (type jpg)
 <use lin_cross_val.JPG>
-Package pdftex.def Info: lin_cross_val.JPG  used on input line 850.
+Package pdftex.def Info: lin_cross_val.JPG  used on input line 852.
 (pdftex.def)             Requested size: 289.07999pt x 47.13177pt.
- [29 <./cross_val.JPG> <./lin_cross_val.JPG>]
-<forest_val.JPG, id=809, 886.43672pt x 218.31563pt>
+ [30 <./cross_val.JPG> <./lin_cross_val.JPG>]
+<forest_val.JPG, id=853, 886.43672pt x 218.31563pt>
 File: forest_val.JPG Graphic file (type jpg)
 <use forest_val.JPG>
-Package pdftex.def Info: forest_val.JPG  used on input line 868.
+Package pdftex.def Info: forest_val.JPG  used on input line 870.
 (pdftex.def)             Requested size: 433.62pt x 106.7957pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 873.
-[30 <./forest_val.JPG>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 873.
+[31 <./forest_val.JPG>]
+<grid.JPG, id=870, 674.1436pt x 584.1825pt>
+File: grid.JPG Graphic file (type jpg)
+<use grid.JPG>
+Package pdftex.def Info: grid.JPG  used on input line 898.
+(pdftex.def)             Requested size: 325.215pt x 281.82172pt.
+ [32 <./grid.JPG>]
+<feature_imp.JPG, id=880, 615.0478pt x 487.8225pt>
+File: feature_imp.JPG Graphic file (type jpg)
+<use feature_imp.JPG>
+Package pdftex.def Info: feature_imp.JPG  used on input line 926.
+(pdftex.def)             Requested size: 361.34999pt x 286.60692pt.
+ [33] [34 <./feature_imp.JPG>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 968.
+
+[35]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 968.
  (sketch.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 873.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 873.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 968.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 968.
 Package rerunfilecheck Info: File `sketch.out' has not changed.
-(rerunfilecheck)             Checksum: 45FB6D5142A4390CC68781AC647482B2;4314.
+(rerunfilecheck)             Checksum: A78DA820680E4A921CE2E758C2D4FE64;5759.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 873.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 968.
  ) 
 Here is how much of TeX's memory you used:
- 27205 strings out of 492973
- 455238 string characters out of 3135935
+ 27609 strings out of 492973
+ 460444 string characters out of 3135935
  903230 words of memory out of 3000000
- 30166 multiletter control sequences out of 15000+200000
- 560968 words of font info for 129 fonts, out of 3000000 for 9000
+ 30519 multiletter control sequences out of 15000+200000
+ 562318 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,7n,63p,699b,1957s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/s
@@ -1420,26 +1434,28 @@ msun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/
 Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/
 WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.
 ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts
-/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDO
+/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDO
 WS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><
-C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><D:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmex10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmsl10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmsy7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti1
-0.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on sketch.pdf (30 pages, 2997931 bytes).
+C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/sims
+un.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fo
+nts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><D:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmex10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.p
+fb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr5.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmsl10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb
+><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on sketch.pdf (35 pages, 3714264 bytes).
 PDF statistics:
- 1178 PDF objects out of 1200 (max. 8388607)
- 461 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1300 PDF objects out of 1440 (max. 8388607)
+ 500 named destinations out of 1000 (max. 500000)
+ 640 words of extra memory for PDF output out of 10000 (max. 10000000)
 

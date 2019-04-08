@@ -832,6 +832,8 @@ scores = cross_val_score(tree_reg,housing_prepared,housing_labels,scoring="neg_m
 rmse_scores = np.sqrt(-scores)
 \end{lstlisting} 
 
+在这里使用的是均方根误差，也就是把预测值和实际值之间求一个MSE。
+
 \begin{figure}[H]
 \centering
 \includegraphics[width = 4in]{cross_val.JPG}
@@ -868,6 +870,99 @@ display_scores(forest_rmse_scores)
 \includegraphics[width = 6in]{forest_val.JPG}
 \caption{Cross-Vaildation of RandomForestRegressor}
 \end{figure}
+
+通过结果可以看出，预测的结果和实际还是有着较大的差距。因此，这里还是Overfitting了。我们要不就是简化模型，在要不就是获取更多数据。在这里仅仅测试这几个方法，当然可以尝试的方法还有很多。
+
+
+\section{Fine-Tune Your Model}
+
+Let's assume we have a list of promising models.We need to fine-tune them.
+
+\subsection{Grid Search}
+
+One way to do that is to fiddle with the hyperparameters,until you find the a great combinationof hyperparameter values.We should get Scikit-Learn's GridSearchCV to search for us.
+
+\begin{lstlisting}
+from sklearn.model_selection import GridSearchCV
+
+para_grid = [{'n_estimators':[3,10,30],'max_features':[2,4,6,8]},{'bootstrap':[False],'n_estimators':[3,10],'max_features':[2,3,4]}]
+forest_reg = RandomForestRegressor()
+grid_search = GridSearchCV(forest_reg,para_grid,cv=5,scoring='neg_mean_squared_error')
+grid_search.fit(housing_prepared,housing_labels)
+\end{lstlisting}
+
+在这里简单说明一下，更详细的将会在后面说到。这里做的就是数据的组合，穷举所有可能的组合。在上面的例子中，首先再第一个字典中衡量$3*4=12$种组合。接下来在第二个字典中穷举$2*3=6$种组合。只是在这里的bootstrap参数被设为False。接下来这18种不同的组合中的每一种都会训练五次(5 times fold cross vaildation).共计90轮训练。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 4.5in]{grid.JPG}
+\caption{Grid Search}
+\end{figure}
+
+可以看出，最好的情况，RMSE为49959，比之前的结果略好一点(52634)。
+
+\subsection{Randomized Search}
+刚才的方法好归好，但是可以想见的是，当attributes过多的时候，这个循环的次数就会非常大，复杂度极高。这时候就会用到RandomizedSearchCV.用法类似，不再赘述。
+
+\subsection{Ensemble Methods}
+
+另一个提高精度的方法就是使用不同模型的组合。这个将在第七章讲。
+
+\subsection{Analyze the Best Models and Their Errors}
+
+通过上面的分析之后，我们看看这些重要的特性是什么
+
+
+\begin{lstlisting}
+feature_importance = grid_search.best_estimator_.feature_importances_
+extra_attribs = ["rooms_per_hhold","pop_per_hhold","bedrooms_per_room"]
+cat_one_hot_attribs = list(encoder.classes_)
+attributes = num_attribs+extra_attribs+cat_one_hot_attribs
+sorted(zip(feature_importance,attributes),reverse=True)
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 5in]{feature_imp.JPG}
+\caption{Feature importance}
+\end{figure}
+
+\subsection{Evaluate Your System on the Test Set}
+
+\begin{lstlisting}
+final_model = grid_search.best_estimator_
+
+X_test = strat_test_set.drop("median_house_value",axis = 1)
+y_test = strat_test_set["median_house_value"].copy()
+
+X_test_prepared = full_pipeline.transform(X_test)
+final_prediction = final_model.predict(X_test_prepared)
+
+final_mse = mean_squared_error(y_test,final_prediction)
+final_rmse = np.sqrt(final_mse)
+\end{lstlisting}
+
+最后的结果是50014,评估结果通常要比交叉验证的效果差一点，如果你之前做过很多超参数微调（因为你的系统在验证集上微调，得到了不错的性能，通常不会在未知的数据集上有同样好的效果）。这个例子不属于这种情况，但是当发生这种情况时，你一定要忍住不要调节超参数，使测试集的效果变好；这样的提升不能推广到新数据上。
+
+\section{Launch,Monitor and Maintain Your System}
+
+很好，你被允许启动系统了！你需要为实际生产做好准备，特别是接入输入数据源，并编写测试。
+
+你还需要编写监控代码，以固定间隔检测系统的实时表现，当发生下降时触发报警。这对于捕获突然的系统崩溃和性能下降十分重要。做监控很常见，是因为模型会随着数据的演化而性能下降，除非模型用新数据定期训练。
+
+评估系统的表现需要对预测值采样并进行评估。这通常需要人来分析。分析者可能是领域专家，或者是众包平台（比如 Amazon Mechanical Turk 或 CrowdFlower）的工人。不管采用哪种方法，你都需要将人工评估的流水线植入系统。
+
+你还要评估系统输入数据的质量。有时因为低质量的信号（比如失灵的传感器发送随机值，或另一个团队的输出停滞），系统的表现会逐渐变差，但可能需要一段时间，系统的表现才能下降到一定程度，触发警报。如果监测了系统的输入，你就可能尽量早的发现问题。对于线上学习系统，监测输入数据是非常重要的。
+
+最后，你可能想定期用新数据训练模型。你应该尽可能自动化这个过程。如果不这么做，非常有可能你需要每隔至少六个月更新模型，系统的表现就会产生严重波动。如果你的系统是一个线上学习系统，你需要定期保存系统状态快照，好能方便地回滚到之前的工作状态。
+
+实践！
+
+
+\section{Try it Out}
+希望这一章能告诉你机器学习项目是什么样的，你能用学到的工具训练一个好系统。你已经看到，大部分的工作是数据准备步骤、搭建监测工具、建立人为评估的流水线和自动化定期模型训练，当然，最好能了解整个过程、熟悉三或四种算法，而不是在探索高级算法上浪费全部时间，导致在全局上的时间不够。
+
+有机会去kaggle做做东西。
 
 
 \end{document}
